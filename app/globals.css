@@ -1,26 +1,25 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #325C6A;
+  --color-primary-hover: #25444e;
+  --color-background-light: #FDFBFB;
+  --color-background-dark: #121A1C;
+  --color-surface-light: #FFFFFF;
+  --color-surface-dark: #1E292B;
+  --color-text-light: #2D3748;
+  --color-text-dark: #E2E8F0;
+  --color-accent-pink: #FA9896;
+  --color-accent-green: #A5D6A7;
+
+  --font-display: var(--font-manrope);
+
+  --background-image-hero-pattern: linear-gradient(to right bottom, rgba(253, 251, 251, 0.9), rgba(253, 251, 251, 0.8)), url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+  --background-image-hero-pattern-dark: linear-gradient(to right bottom, rgba(18, 26, 28, 0.9), rgba(18, 26, 28, 0.85)), url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .clip-wave {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
