@@ -171,12 +171,12 @@ export default function Home() {
         </section>
 
         <section className="section">
-          <div className="section-tag">Trusted by</div>
-          <h2>Clinical collaboration and validation</h2>
+          <div className="section-tag">Supported by</div>
+          <h2>Collaboration</h2>
           <div className="trust-row">
             <div className="trust-badge">
               <strong>Beaumont Hospital &amp; RCSI</strong>
-              Co-developed a clinical research questionnaire with RCSI on treatment-induced menopause in breast cancer, submitted for ethics approval (Beaumont Hospital)
+              Co-developed a clinical research questionnaire with RCSI on treatment-induced menopause in breast cancer
             </div>
             <div className="trust-badge">
               <strong>Dr Ghazala Aziz-Scott</strong>
