@@ -1,17 +1,43 @@
 "use client";
 
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"patient" | "hospital">("patient");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSignup = () => {
-    if (email && email.includes("@")) {
-      alert("Thank you — you’re on the early access list. I’ll be in touch as we progress towards the first pilot group.");
-      setEmail("");
-    } else {
+  const handleSignup = async () => {
+    if (!email || !email.includes("@")) {
       alert("Please enter a valid email address.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email }]);
+
+      if (error) {
+        if (error.code === '23505') {
+          alert("This email is already on the list!");
+        } else {
+          console.error("Supabase error:", error);
+          alert("Something went wrong. Please try again.");
+        }
+      } else {
+        setIsSubmitted(true);
+        setEmail("");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -34,7 +60,7 @@ export default function Home() {
           <span className="hero-tag">Breast cancer · Treatment-induced menopause · Ireland</span>
           <h1>When breast cancer treatment suddenly pushes your body into menopause and no one prepares you for it</h1>
           <p>
-            A simple, structured way to help you prepare for and manage menopause symptoms during treatment — so you can feel more like yourself and stay on treatment.<br/>
+            A simple, structured way to help you prepare for and manage menopause symptoms during treatment — so you can feel more like yourself and stay on treatment.<br />
             <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>Evidence-informed and designed for women with breast cancer.</span>
           </p>
         </section>
@@ -121,8 +147,8 @@ export default function Home() {
           <h2>Supporting women through every stage of treatment</h2>
           <div className="audience-grid">
             <div className="audience-col">
-              <button 
-                className={`audience-tab ${activeTab === "patient" ? "active" : ""}`} 
+              <button
+                className={`audience-tab ${activeTab === "patient" ? "active" : ""}`}
                 onClick={() => { setActiveTab("patient"); scrollTo("audience-section"); }}
               >
                 For women affected by breast cancer
@@ -140,8 +166,8 @@ export default function Home() {
             </div>
 
             <div className="audience-col" style={{ marginTop: "10px" }}>
-              <button 
-                className={`audience-tab ${activeTab === "hospital" ? "active" : ""}`} 
+              <button
+                className={`audience-tab ${activeTab === "hospital" ? "active" : ""}`}
                 onClick={() => { setActiveTab("hospital"); scrollTo("audience-section"); }}
               >
                 For clinical teams
@@ -158,8 +184,8 @@ export default function Home() {
                   We are engaging with clinical teams to explore early collaboration as the programme is developed. Interested in shaping MeAgain or learning more? We’d love to hear from you.
                 </p>
                 <div style={{ marginTop: "16px" }}>
-                  <button 
-                    style={{ background: "var(--teal-dark)", color: "#fff", border: "none", padding: "10px 18px", borderRadius: "20px", fontSize: "13px", cursor: "pointer" }} 
+                  <button
+                    style={{ background: "var(--teal-dark)", color: "#fff", border: "none", padding: "10px 18px", borderRadius: "20px", fontSize: "13px", cursor: "pointer" }}
                     onClick={() => window.location.href = "mailto:hello@mymeagain.ie?subject=Clinical collaboration"}
                   >
                     Express interest
@@ -194,21 +220,34 @@ export default function Home() {
           <p>Register your interest to be part of the first group of women shaping MeAgain. Over the next few months, you’ll receive updates and opportunities to contribute, with early access to the first pilot as it becomes available.</p>
           <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "-8px" }}>You’ll hear directly from us — no spam, just occasional updates as we build.</p>
           <div className="form-row">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSignup()}
-            />
-            <button onClick={handleSignup}>Join early access</button>
+            {isSubmitted ? (
+              <div style={{ background: "var(--teal-light)", padding: "16px", borderRadius: "8px", width: "100%", textAlign: "center", border: "1px solid var(--teal)" }}>
+                <p style={{ color: "var(--teal-dark)", margin: 0, fontWeight: 500 }}>
+                  ✓ Thank you — you&apos;re on the early access list.
+                </p>
+              </div>
+            ) : (
+              <>
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  value={email}
+                  disabled={isLoading}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSignup()}
+                />
+                <button onClick={handleSignup} disabled={isLoading}>
+                  {isLoading ? "Joining..." : "Join early access"}
+                </button>
+              </>
+            )}
           </div>
           <p className="unsub">No spam. <a href="mailto:hello@mymeagain.ie?subject=Unsubscribe&body=Please remove me from the MeAgain waitlist.">Unsubscribe any time</a></p>
         </section>
 
         <div className="survey-banner" id="survey-section">
           <h3 style={{ fontSize: "16px", fontWeight: 500, color: "var(--teal-dark)", fontFamily: "Arial, sans-serif" }}>Help shape MeAgain</h3>
-          <p>If you’d like to help shape MeAgain sooner, you can share your experience in a short 5-minute survey.<br/><strong>Join early access above, or contribute now by taking the survey.</strong></p>
+          <p>If you’d like to help shape MeAgain sooner, you can share your experience in a short 5-minute survey.<br /><strong>Join early access above, or contribute now by taking the survey.</strong></p>
           <a className="survey-btn" href="https://forms.gle/ijFAyApvii9Z38Y28" target="_blank" rel="noopener noreferrer">Take the survey</a>
         </div>
 
