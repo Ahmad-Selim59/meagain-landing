@@ -4,7 +4,6 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"patient" | "hospital">("patient");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -147,12 +146,7 @@ export default function Home() {
           <h2>Supporting women through every stage of treatment</h2>
           <div className="audience-grid">
             <div className="audience-col">
-              <button
-                className={`audience-tab ${activeTab === "patient" ? "active" : ""}`}
-                onClick={() => { setActiveTab("patient"); scrollTo("audience-section"); }}
-              >
-                For women affected by breast cancer
-              </button>
+              <div className="audience-label">For women affected by breast cancer</div>
               <div className="audience-card patient">
                 <h3>Before, during and after treatment</h3>
                 <ul>
@@ -165,13 +159,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="audience-col" style={{ marginTop: "10px" }}>
-              <button
-                className={`audience-tab ${activeTab === "hospital" ? "active" : ""}`}
-                onClick={() => { setActiveTab("hospital"); scrollTo("audience-section"); }}
-              >
-                For clinical teams
-              </button>
+            <div className="audience-col">
+              <div className="audience-label">For clinical teams</div>
               <div className="audience-card hospital">
                 <h3>For breast cancer units and oncology teams</h3>
                 <ul>
