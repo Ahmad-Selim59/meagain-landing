@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     url: "https://mymeagain.ie",
     siteName: "MeAgain",
   },
+  icons: {
+    icon: "/meagain_icon.png",
+  },
 };
 
 export default function RootLayout({
