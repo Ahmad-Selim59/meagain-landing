@@ -3,11 +3,11 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MeAgain - Support for women affected by breast cancer",
+  title: "MeAgain - Menopause Support During Breast Cancer Treatment",
   description:
     "MeAgain is being developed to help women prepare for and stabilise menopause symptoms across the breast cancer treatment journey",
   openGraph: {
-    title: "MeAgain - Support for women affected by breast cancer",
+    title: "MeAgain - Menopause Support During Breast Cancer Treatment",
     description:
       "MeAgain is being developed to help women prepare for and stabilise menopause symptoms across the breast cancer treatment journey",
     url: "https://mymeagain.ie",
