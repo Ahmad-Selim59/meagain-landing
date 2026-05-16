@@ -1,3 +1,20 @@
+import { Fragment } from "react";
+
+const FOOTER_POLICIES = [
+  {
+    file: "01. Acceptable Use Policy_MeAgain_Ltd.pdf",
+    label: "Acceptable use policy",
+  },
+  {
+    file: "02. Privacy Policy_MeAgain_Ltd.pdf",
+    label: "Privacy policy",
+  },
+  {
+    file: "03. Terms and Conditions of Website Use_MeAgain_Ltd.pdf",
+    label: "Terms & conditions of website use",
+  },
+] as const;
+
 export function SiteFooter() {
   return (
     <footer>
@@ -9,14 +26,47 @@ export function SiteFooter() {
           href="https://www.linkedin.com/company/mymeagain/"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ display: "inline-flex", alignItems: "center", verticalAlign: "middle", marginLeft: "4px" }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            verticalAlign: "middle",
+            marginLeft: "4px",
+          }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "#0A66C2" }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style={{ color: "#0A66C2" }}
+          >
             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
           </svg>
         </a>
       </p>
-      <p style={{ marginTop: "4px" }}>Non-diagnostic. Designed to complement, not replace, medical care.</p>
+      <nav className="footer-policies" aria-label="Legal policies">
+        {FOOTER_POLICIES.map(({ file, label }, i) => (
+          <Fragment key={file}>
+            {i > 0 ? (
+              <span className="footer-policies-sep" aria-hidden>
+                {" "}
+                ·{" "}
+              </span>
+            ) : null}
+            <a
+              href={`/policies/${encodeURIComponent(file)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {label}
+            </a>
+          </Fragment>
+        ))}
+      </nav>
+      <p style={{ marginTop: "4px" }}>
+        Non-diagnostic. Designed to complement, not replace, medical care.
+      </p>
     </footer>
   );
 }

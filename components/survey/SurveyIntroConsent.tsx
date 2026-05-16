@@ -1,6 +1,8 @@
 "use client";
 
-const PRIVACY_URL = "https://www.mymeagain.ie/privacy-policy";
+const PRIVACY_POLICY_FILE = "02. Privacy Policy_MeAgain_Ltd.pdf";
+const PRIVACY_POLICY_HREF = `/policies/${encodeURIComponent(PRIVACY_POLICY_FILE)}`;
+
 const ANA_LINKEDIN =
   "https://www.linkedin.com/in/ana-d-7273b765/";
 
@@ -63,16 +65,16 @@ export function SurveyConsentIntroContent({
           <li key={i}>{t}</li>
         ))}
         <li>
-          For full details on how we handle your data please review our Privacy Policy at{" "}
+          For full details on how we handle your data please review our{" "}
           <a
-            href={PRIVACY_URL}
+            href={PRIVACY_POLICY_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className="survey-intro-link"
           >
-            www.mymeagain.ie/privacy-policy
-          </a>
-          .
+            Privacy Policy
+          </a>{" "}
+          (PDF).
         </li>
       </ul>
 

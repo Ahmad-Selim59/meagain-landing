@@ -948,6 +948,23 @@ footer {
 footer a { color: var(--teal-mid); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
+.footer-policies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  row-gap: 0.35rem;
+  column-gap: 0;
+  margin: 0.65rem auto 0;
+  max-width: 40rem;
+  font-size: clamp(var(--fs-11), 1.05vw, var(--fs-13));
+}
+
+.footer-policies-sep {
+  color: var(--text-muted);
+  user-select: none;
+}
+
 @media (max-width: 600px) {
   .stat-row { grid-template-columns: 1fr; }
   .pathways { grid-template-columns: 1fr; }
