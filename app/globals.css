@@ -152,6 +152,10 @@
   --survey-table-corner-pct-mobile: 42%;
   --survey-matrix-corner-pct: 28%;
 
+  --site-header-offset: 4.25rem;
+  --site-header-reveal-duration: 0.32s;
+  --site-header-reveal-ease: cubic-bezier(0.33, 1, 0.68, 1);
+
   /* Responsive shell */
   --spacing-container-x: 1.5rem;
   --spacing-section-y: 2.5rem;
@@ -180,15 +184,33 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: var(--site-header-offset);
 }
 
-/* Full-width strip (flex child of body); inner nav caps width like .site */
+/* Full-width strip: fixed reveal/hide with scroll direction (see SiteHeader.tsx) */
 .site-header {
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
   width: 100%;
   min-width: 0;
-  align-self: stretch;
+  background-color: var(--cream);
   border-bottom: var(--bw-hairline) solid var(--border);
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    transform var(--site-header-reveal-duration) var(--site-header-reveal-ease),
+    opacity var(--site-header-reveal-duration) var(--site-header-reveal-ease);
+}
+
+.site-header.is-concealed {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .site-header-nav {
@@ -838,6 +860,13 @@ footer a:hover { text-decoration: underline; }
 @layer utilities {
   .clip-wave {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition-duration: 0.01ms;
+    transition-timing-function: linear;
   }
 }
 
