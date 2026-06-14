@@ -23,6 +23,7 @@ const OFFSET_VAR = "--site-header-offset";
 export function SiteHeader() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isTeam = pathname === "/team";
 
   const headerRef = useRef<HTMLElement>(null);
   const lastScrollY = useRef(0);
@@ -102,6 +103,16 @@ export function SiteHeader() {
           <span>MeAgain</span>
         </Link>
         <div className="nav-actions">
+          <Link
+            href="/team"
+            className={
+              isTeam ? "nav-cta nav-cta--outline is-active" : "nav-cta nav-cta--outline"
+            }
+            style={navLinkStyle}
+            aria-current={isTeam ? "page" : undefined}
+          >
+            Meet the team
+          </Link>
           {isHome ? (
             <>
               <button
