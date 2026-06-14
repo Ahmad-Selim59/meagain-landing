@@ -187,7 +187,8 @@ export default function Home() {
             </div>
             <div className="trust-badge">
               <strong>Local Enterprise Office</strong>
-              Supported through LEO mentoring programme
+              Supported through LEO mentoring 
+              LEO Feasibility Grant awarded to fund independent clinical research with healthcare professionals across breast cancer care in Ireland 
             </div>
           </div>
         </section>
