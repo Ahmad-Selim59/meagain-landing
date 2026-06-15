@@ -1101,6 +1101,23 @@ a.nav-cta {
   margin-bottom: var(--px-3);
 }
 
+.trust-badge ul {
+  list-style: disc;
+  list-style-position: outside;
+  padding-left: 1.15rem;
+  margin: 0;
+}
+
+.trust-badge ul li {
+  padding: var(--px-3) 0;
+  line-height: var(--lh-banner);
+  display: list-item;
+}
+
+.trust-badge ul li::marker {
+  color: var(--teal-mid);
+}
+
 .cta-section {
   background: var(--teal-pale);
   border-radius: var(--radius-lg);
