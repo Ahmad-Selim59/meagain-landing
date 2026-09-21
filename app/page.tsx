@@ -195,6 +195,14 @@ export default function Home() {
                 </li>
               </ul>
             </div>
+            <div className="trust-badge">
+              <strong>Enterprise Ireland</strong>
+              <ul>
+                <li>
+                  Innovation Voucher awarded to work with a university on clinical validation
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
